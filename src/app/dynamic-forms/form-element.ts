@@ -2,11 +2,12 @@ import { ValidatorFn } from '@angular/forms';
 
 export class FormElement {
     Name: string;
-    Label: string;
-    Tooltip: string;
-    IsRequired: boolean;
-    MinValue: number;
-    MaxValue: number;
-    MaxLength: number;
-    Validators: ValidatorFn[];
+    Label = '';
+    Tooltip = '';
+    IsRequired = false;
+    IsUserEditable = true;
+    MinValue = 0;
+    MaxValue = 0;
+    MaxLength = 0;
+    Validators: ValidatorFn[] = [];
 }
