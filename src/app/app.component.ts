@@ -49,7 +49,7 @@ export class AppComponent implements OnInit {
 
     this.myElements['firstName'] = {
       Name: 'firstName',
-      DataSource: (currentPerson),
+      DataSource: currentPerson,
       DataProperty: 'FirstName',
       Label: 'First Name',
       Tooltip: 'Enter your given name',
@@ -62,7 +62,7 @@ export class AppComponent implements OnInit {
     };
     this.myElements['lastName'] = {
       Name: 'lastName',
-      DataSource: (currentPerson),
+      DataSource: currentPerson,
       DataProperty: 'LastName',
       Label: 'Last Name',
       Tooltip: 'Enter your surname',
@@ -75,7 +75,7 @@ export class AppComponent implements OnInit {
     };
     this.myElements['email'] = {
       Name: 'phone',
-      DataSource: (currentPerson),
+      DataSource: currentPerson,
       DataProperty: 'Email',
       Label: 'E-Mail',
       Tooltip: 'Enter your email address',
@@ -87,6 +87,6 @@ export class AppComponent implements OnInit {
       Validators: []
     };
     this.myGroup = this.formService.buildFormGroup(this.myElements);
+    console.log(this.myGroup);
   }
-
 }

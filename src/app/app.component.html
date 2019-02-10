@@ -1,17 +1,18 @@
 <!--The content below is only a placeholder and can be replaced.-->
-<h1>It works for me!</h1>
 <div class="card">
   <div class="card-header">
-
+    <h1>People</h1>
   </div>
   <div class="card-body">
     <form formGroup="myGroup">
-      <div class="container">
-        <div class="row">
-          <div class="col-4"><label for="lastName"></div>
-          <div class="col-4">Value</div>
+      <div class="row">
+        <div class="col-4"><label for="lastName">Last Name:</label>
+        </div>
+        <div class="col-4">
+          <input id="lastName" type=text formcontrolname="lastName">
         </div>
       </div>
     </form>
   </div>
 </div>
+{{ myGroup.length }}
