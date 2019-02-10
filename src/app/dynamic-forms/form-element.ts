@@ -2,6 +2,8 @@ import { ValidatorFn } from '@angular/forms';
 
 export class FormElement {
     Name: string;
+    DataSource: any;
+    DataProperty: string;
     Label = '';
     Tooltip = '';
     IsRequired = false;

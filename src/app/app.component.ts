@@ -3,6 +3,7 @@ import { FormElement } from './dynamic-forms/form-element';
 import { ValidatorFn, FormGroup } from '@angular/forms';
 
 import { DynamicFormsService } from './dynamic-forms/dynamic-forms.service';
+import { Person } from './person';
 
 @Component({
   selector: 'app-root',
@@ -11,14 +12,45 @@ import { DynamicFormsService } from './dynamic-forms/dynamic-forms.service';
 })
 export class AppComponent implements OnInit {
   title = 'Angular Dynamic Forms';
-  myElements: { [name: string]: FormElement } = {};
+  myElements: FormElement[] = [];
   myGroup: FormGroup;
+  persons: Person[] = [];
 
   constructor(private formService: DynamicFormsService) { }
 
   ngOnInit() {
+
+    this.persons.push(<Person>
+      {
+        Id: 1,
+        FirstName: 'Smith',
+        LastName: 'Pete',
+        Email: 'petesmith@gmail.com'
+      }
+    );
+    this.persons.push(<Person>
+      {
+        Id: 2,
+        FirstName: 'Jones',
+        LastName: 'Congo',
+        Email: 'pirate@yahoo.com'
+      }
+    );
+    this.persons.push(<Person>
+      {
+        Id: 3,
+        FirstName: 'Boojaroo',
+        LastName: 'Harucha',
+        Email: 'imso@cool.com'
+      }
+    );
+
+    let currentPerson = (this.persons.filter(e => +e.Id === 3 )[0]);
+
     this.myElements['firstName'] = {
       Name: 'firstName',
+      DataSource: (currentPerson),
+      DataProperty: 'FirstName',
       Label: 'First Name',
       Tooltip: 'Enter your given name',
       IsRequired: true,
@@ -30,6 +62,8 @@ export class AppComponent implements OnInit {
     };
     this.myElements['lastName'] = {
       Name: 'lastName',
+      DataSource: (currentPerson),
+      DataProperty: 'LastName',
       Label: 'Last Name',
       Tooltip: 'Enter your surname',
       IsRequired: true,
@@ -39,10 +73,12 @@ export class AppComponent implements OnInit {
       MaxValue: 0,
       Validators: []
     };
-    this.myElements['phone'] = {
+    this.myElements['email'] = {
       Name: 'phone',
-      Label: 'Phone',
-      Tooltip: 'Enter your primary phone number',
+      DataSource: (currentPerson),
+      DataProperty: 'Email',
+      Label: 'E-Mail',
+      Tooltip: 'Enter your email address',
       IsRequired: false,
       IsUserEditable: true,
       MaxLength: 12,
