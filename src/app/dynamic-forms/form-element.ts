@@ -10,6 +10,7 @@ export class FormElement {
     IsUserEditable = true;
     MinValue = 0;
     MaxValue = 0;
+    MinLength = 0;
     MaxLength = 0;
     Validators: ValidatorFn[] = [];
 }
