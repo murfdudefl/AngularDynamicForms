@@ -15,6 +15,7 @@ export class AppComponent implements OnInit {
   myElements: FormElement[] = [];
   myGroup: FormGroup;
   persons: Person[] = [];
+  currentPerson: Person;
 
   constructor(private formService: DynamicFormsService) { }
 
@@ -45,11 +46,13 @@ export class AppComponent implements OnInit {
       }
     );
 
-    let currentPerson = (this.persons.filter(e => +e.Id === 3 )[0]);
+    this.currentPerson = (this.persons.filter(e => +e.Id === 3 )[0]);
+    console.log(this.currentPerson['LastName']);
 
-    this.myElements['firstName'] = {
+    this.myElements.push(<FormElement>
+      {
       Name: 'firstName',
-      DataSource: currentPerson,
+      DataSource: this.currentPerson,
       DataProperty: 'FirstName',
       Label: 'First Name',
       Tooltip: 'Enter your given name',
@@ -59,10 +62,12 @@ export class AppComponent implements OnInit {
       MinValue: 0,
       MaxValue: 0,
       Validators: []
-    };
-    this.myElements['lastName'] = {
+      }
+    );
+    this.myElements.push(<FormElement>
+      {
       Name: 'lastName',
-      DataSource: currentPerson,
+      DataSource: this.currentPerson,
       DataProperty: 'LastName',
       Label: 'Last Name',
       Tooltip: 'Enter your surname',
@@ -72,10 +77,11 @@ export class AppComponent implements OnInit {
       MinValue: 0,
       MaxValue: 0,
       Validators: []
-    };
-    this.myElements['email'] = {
+    });
+    this.myElements.push(<FormElement>
+      {
       Name: 'phone',
-      DataSource: currentPerson,
+      DataSource: this.currentPerson,
       DataProperty: 'Email',
       Label: 'E-Mail',
       Tooltip: 'Enter your email address',
@@ -85,7 +91,7 @@ export class AppComponent implements OnInit {
       MinValue: 0,
       MaxValue: 0,
       Validators: []
-    };
+    });
     this.myGroup = this.formService.buildFormGroup(this.myElements);
     console.log(this.myGroup);
   }

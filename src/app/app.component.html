@@ -4,15 +4,31 @@
     <h1>People</h1>
   </div>
   <div class="card-body">
-    <form formGroup="myGroup">
-      <div class="row">
-        <div class="col-4"><label for="lastName">Last Name:</label>
+    <div class="container">
+      <form [formGroup]="myGroup">
+        <div class="row">
+          <div class="col-4"><label for="lastName">Last Name:</label>
+          </div>
+          <div class="col-4">
+            <input id="lastName" type=text formControlName="lastName">
+            <div>Last Name: {{ myGroup.controls["lastName"].value }}</div>
+          </div>
         </div>
-        <div class="col-4">
-          <input id="lastName" type=text formcontrolname="lastName">
+        <div class="row">
+          <div class="col-4"><label for="firstName">First Name:</label>
+          </div>
+          <div class="col-4">
+            <input id="firstName" type=text formcontrolname="firstName">
+          </div>
         </div>
-      </div>
-    </form>
+        <div class="row">
+          <div class="col-4"><label for="email">Email:</label>
+          </div>
+          <div class="col-4">
+            <input id="email" type=text formcontrolname="email">
+          </div>
+        </div>
+      </form>
+    </div>
   </div>
 </div>
-{{ myGroup.length }}
