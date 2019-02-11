@@ -42,7 +42,7 @@ export class DynamicFormsService {
             e.Validators.forEach(val => {
                 validators.push(val);
             });
-            group.addControl(e.Name, new FormControl(e.DataSource(e.DataProperty), validators));
+            group.addControl(e.Name, new FormControl(e.DataSource[e.DataProperty], validators));
         });
         return group;
     }
