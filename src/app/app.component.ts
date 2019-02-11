@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormElement } from './dynamic-forms/form-element';
-import { ValidatorFn, FormGroup } from '@angular/forms';
+import { ValidatorFn, FormGroup, ReactiveFormsModule , FormsModule } from '@angular/forms';
 
 import { DynamicFormsService } from './dynamic-forms/dynamic-forms.service';
 import { Person } from './person';
@@ -18,6 +18,17 @@ export class AppComponent implements OnInit {
   currentPerson: Person;
 
   constructor(private formService: DynamicFormsService) { }
+
+  onSubmit() {
+    console.log(this.myGroup.value);
+    if (this.myGroup.valid) {
+      console.log('Submitted');
+    } else {
+      this.myGroup.errors.forEach(e => {
+        console.log(e);
+      });
+    }
+  }
 
   ngOnInit() {
 
@@ -66,6 +77,20 @@ export class AppComponent implements OnInit {
     );
     this.myElements.push(<FormElement>
       {
+      Name: 'email',
+      DataSource: this.currentPerson,
+      DataProperty: 'Email',
+      Label: 'E-Mail',
+      Tooltip: 'Enter your email address',
+      IsRequired: false,
+      IsUserEditable: true,
+      MaxLength: 25,
+      MinValue: 0,
+      MaxValue: 0,
+      Validators: []
+    });
+    this.myElements.push(<FormElement>
+      {
       Name: 'lastName',
       DataSource: this.currentPerson,
       DataProperty: 'LastName',
@@ -78,21 +103,7 @@ export class AppComponent implements OnInit {
       MaxValue: 0,
       Validators: []
     });
-    this.myElements.push(<FormElement>
-      {
-      Name: 'phone',
-      DataSource: this.currentPerson,
-      DataProperty: 'Email',
-      Label: 'E-Mail',
-      Tooltip: 'Enter your email address',
-      IsRequired: false,
-      IsUserEditable: true,
-      MaxLength: 12,
-      MinValue: 0,
-      MaxValue: 0,
-      Validators: []
-    });
-    this.myGroup = this.formService.buildFormGroup(this.myElements);
+    this.myGroup = this.formService.buildFormGroup(this.myElements, null);
     console.log(this.myGroup);
   }
 }

@@ -6,6 +6,7 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { DynamicFormsService } from './dynamic-forms/dynamic-forms.service';
+import { DynamicFormsComponent } from './dynamic-forms/dynamic-forms.component';
 
 @NgModule({
   declarations: [
@@ -14,6 +15,7 @@ import { DynamicFormsService } from './dynamic-forms/dynamic-forms.service';
   imports: [
     BrowserModule,
     AppRoutingModule,
+    ReactiveFormsModule,
     NgbModule
   ],
   providers: [],

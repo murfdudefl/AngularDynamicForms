@@ -5,27 +5,35 @@
   </div>
   <div class="card-body">
     <div class="container">
-      <form [formGroup]="myGroup">
+      <form [formGroup]="myGroup" (ngSubmit)="onSubmit()">
         <div class="row">
-          <div class="col-4"><label for="lastName">Last Name:</label>
+          <div class="col-4"><label for="something">Last Name:</label>
           </div>
           <div class="col-4">
-            <input id="lastName" type=text formControlName="lastName">
-            <div>Last Name: {{ myGroup.controls["lastName"].value }}</div>
+            <input id="something" class="form-control" formControlName="lastName">
+            <!-- <div>Last Name: {{ myGroup.controls["lastName"].value }}</div> -->
           </div>
         </div>
         <div class="row">
-          <div class="col-4"><label for="firstName">First Name:</label>
+          <div class="col-4"><label for="ctlfirstName">First Name:</label>
           </div>
           <div class="col-4">
-            <input id="firstName" type=text formcontrolname="firstName">
+            <input id="ctlfirstName" class="form-control" formControlName="firstName">
+            <div *ngIf="myGroup.controls['firstName'].errors" class="invalid-feedback">
+              <div *ngIf="myGroup.controls['firstName'].errors.required">First Name is required</div>
+          </div>
+</div>
+        </div>
+        <div class="row">
+          <div class="col-4"><label for="ctlemail">Email:</label>
+          </div>
+          <div class="col-4">
+            <input id="ctlemail" class="form-control" formControlName="email">
           </div>
         </div>
         <div class="row">
-          <div class="col-4"><label for="email">Email:</label>
-          </div>
           <div class="col-4">
-            <input id="email" type=text formcontrolname="email">
+            <button class="btn btn-primary" type="submit">Submit</button>
           </div>
         </div>
       </form>
