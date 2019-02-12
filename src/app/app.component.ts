@@ -8,7 +8,7 @@ import { Person } from './person';
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
-  styleUrls: ['./app.component.sass']
+  styleUrls: ['./app.component.css']
 })
 export class AppComponent implements OnInit {
   title = 'Angular Dynamic Forms';
@@ -103,7 +103,14 @@ export class AppComponent implements OnInit {
       MaxValue: 0,
       Validators: []
     });
-    this.myGroup = this.formService.buildFormGroup(this.myElements, null);
+    this.myGroup = this.formService.buildFormGroup(this.myElements);
     console.log(this.myGroup);
   }
+
+  isFieldValid(field: string) {
+    // const isValid = this.myGroup.get(field).valid || !this.myGroup.get(field).touched;
+    const isValid = this.myGroup.get(field).valid;
+    return isValid;
+  }
+
 }

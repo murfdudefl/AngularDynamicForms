@@ -24,31 +24,29 @@ export class DynamicFormsService {
     //       );
     // }
 
-    buildFormGroup(elements: FormElement[], includedElements: string[]): FormGroup {
+    buildFormGroup(elements: FormElement[]): FormGroup {
         const group = new FormGroup({});
         const validators: ValidatorFn[] = [];
         elements.forEach(e => {
-            if (includedElements == null || +includedElements.indexOf(e.Name) !== -1) {
-                if (e.IsRequired) {
-                    validators.push(Validators.required);
-                }
-                if (+e.MinValue !== 0) {
-                    validators.push(Validators.min(e.MinValue));
-                }
-                if (+e.MaxValue !== 0) {
-                    validators.push(Validators.max(e.MaxValue));
-                }
-                if (+e.MinLength !== 0) {
-                    validators.push(Validators.minLength(e.MinLength));
-                }
-                if (+e.MaxLength !== 0) {
-                    validators.push(Validators.maxLength(e.MaxLength));
-                }
-                e.Validators.forEach(val => {
-                    validators.push(val);
-                });
-                group.addControl(e.Name, new FormControl(e.DataSource[e.DataProperty], validators));
+            if (e.IsRequired) {
+                validators.push(Validators.required);
             }
+            if (+e.MinValue !== 0) {
+                validators.push(Validators.min(e.MinValue));
+            }
+            if (+e.MaxValue !== 0) {
+                validators.push(Validators.max(e.MaxValue));
+            }
+            if (+e.MinLength !== 0) {
+                validators.push(Validators.minLength(e.MinLength));
+            }
+            if (+e.MaxLength !== 0) {
+                validators.push(Validators.maxLength(e.MaxLength));
+            }
+            e.Validators.forEach(val => {
+                validators.push(val);
+            });
+            group.addControl(e.Name, new FormControl(e.DataSource[e.DataProperty], validators));
         });
         return group;
     }

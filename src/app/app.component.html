@@ -19,9 +19,14 @@
           </div>
           <div class="col-4">
             <input id="ctlfirstName" class="form-control" formControlName="firstName">
-            <div *ngIf="myGroup.controls['firstName'].errors" class="invalid-feedback">
+						<div [hidden]="isFieldValid('firstName')" class="error">
+							<div [hidden]="!myGroup.controls['firstName'].hasError('required')">First Name is required.</div>
+							<div [hidden]="!myGroup.controls['firstName'].hasError('maxlength')">
+                First Name is too long (max 8 chars).</div>
+						</div>
+            <!-- <div *ngIf="myGroup.controls['firstName'].errors" class="invalid-feedback">
               <div *ngIf="myGroup.controls['firstName'].errors.required">First Name is required</div>
-          </div>
+          </div> -->
 </div>
         </div>
         <div class="row">
@@ -33,7 +38,7 @@
         </div>
         <div class="row">
           <div class="col-4">
-            <button class="btn btn-primary" type="submit">Submit</button>
+            <button class="btn btn-primary" type="submit" [disabled]="myGroup.invalid">Submit</button>
           </div>
         </div>
       </form>
